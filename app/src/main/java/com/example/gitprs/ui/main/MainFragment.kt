@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -81,6 +82,7 @@ class MainFragment : Fragment() {
         viewModel.observePullRequestLiveData().observe(viewLifecycleOwner, Observer {
             hideProgressBar()
             if (it.isNullOrEmpty()) {
+                iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.not_found))
                 showErrorView(requireContext().getString(R.string.no_pull_request))
                 return@Observer
             }
@@ -89,7 +91,9 @@ class MainFragment : Fragment() {
 
         viewModel.observeFailure().observe(viewLifecycleOwner, Observer {
             hideProgressBar()
-            showErrorView(requireContext().getString(R.string.something_went_wrong))
+            val message = it.anyObject ?: requireContext().getString(R.string.something_went_wrong)
+            iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.issue))
+            showErrorView(message)
         })
     }
 
@@ -98,6 +102,7 @@ class MainFragment : Fragment() {
             showProgressBar()
             viewModel.getOpenPullRequest(ownerName, repoName)
         } else {
+            iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.internet))
             showErrorView(requireContext().getString(R.string.no_internet))
         }
     }
@@ -111,6 +116,7 @@ class MainFragment : Fragment() {
     }
 
     private fun showPullRequests(it: List<PullRequest>) {
+        Utils.hideKeyboard(requireActivity())
         rv_issue.visibility = View.VISIBLE
         iv_result.visibility = View.GONE
         pullRequestRVAdapter?.updateData(it)
@@ -120,7 +126,6 @@ class MainFragment : Fragment() {
         rv_issue.visibility = View.GONE
         pb_issue.visibility = View.GONE
         iv_result.visibility = View.VISIBLE
-//        requireContext().getString(R.string.owner_validation)
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 

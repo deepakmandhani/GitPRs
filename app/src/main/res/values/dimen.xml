@@ -3,15 +3,15 @@
 
     <dimen name="dimen_0">0dp</dimen>
     <dimen name="dimen_1">1dp</dimen>
-
+    <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_5">5dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_75">75dp</dimen>
 
     <dimen name="text_10">10sp</dimen>
     <dimen name="text_12">12sp</dimen>
     <dimen name="text_15">15sp</dimen>
     <dimen name="text_20">20sp</dimen>
-
 
 </resources>

@@ -21,11 +21,11 @@ class MainViewModel(private val service: GitApiContract) : ViewModel() {
 
     fun getOpenPullRequest(owner: String, repo: String) {
         val liveData = service.getOpenPullRequest(owner, repo)
-        pullRequestMediatorLiveData.addSource(liveData) {
-            it.obj?.let {
+        pullRequestMediatorLiveData.addSource(liveData) { response ->
+            response.obj?.let {
                 pullRequestMediatorLiveData.postValue(it)
             } ?: run {
-                failureResponse.postValue(it.failure)
+                failureResponse.postValue(response.failure)
             }
             pullRequestMediatorLiveData.removeSource(liveData)
         }

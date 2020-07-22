@@ -25,7 +25,7 @@ class GitApiService : GitApiContract {
         val liveData = MutableLiveData<Response<List<PullRequest>, FailureResponse>>()
         apiService.getOpenPullRequest(owner, repo).enqueue(object : Callback<List<PullRequest>> {
             override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
-                liveData.value = Response(null, FailureResponse(t))
+                liveData.value = Response(null, FailureResponse(t.message))
             }
 
             override fun onResponse(
@@ -39,9 +39,7 @@ class GitApiService : GitApiContract {
                     liveData.value = Response(null, FailureResponse(response.message()))
                 }
             }
-
         })
         return liveData
     }
-
 }

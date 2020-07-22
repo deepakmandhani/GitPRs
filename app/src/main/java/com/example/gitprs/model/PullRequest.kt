@@ -1,6 +1,7 @@
 package com.example.gitprs.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 /**
  * Created by Deepak Mandhani on 2020-07-22.
@@ -20,7 +21,7 @@ data class PullRequest(
     @SerializedName("title") val title: String,
     @SerializedName("user") val user: User,
     @SerializedName("body") val body: String,
-    @SerializedName("created_at") val created_at: String,
+    @SerializedName("created_at") val created_at: Date,
     @SerializedName("updated_at") val updated_at: String,
     @SerializedName("merge_commit_sha") val merge_commit_sha: String,
     @SerializedName("draft") val draft: Boolean,

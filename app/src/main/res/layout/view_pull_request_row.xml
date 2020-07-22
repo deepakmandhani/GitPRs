@@ -1,67 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_margin="@dimen/dimen_5"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/light_blue"
+    card_view:cardCornerRadius="@dimen/dimen_5"
+    card_view:cardElevation="@dimen/dimen_1">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="@dimen/dimen_75"
+            android:layout_height="@dimen/dimen_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_git_user" />
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/layout_width_height"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:ellipsize="end"
             android:gravity="start"
-            android:padding="8dp"
+            android:padding="@dimen/dimen_5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_photo"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
         <TextView
             android:id="@+id/tv_author"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/layout_width_height"
             android:gravity="start"
-            android:padding="8dp"
+            android:padding="@dimen/dimen_5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_photo"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="Author" />
 
         <TextView
-            android:id="@+id/tv_url"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:gravity="start"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_author"
-            tools:text="Url" />
-
-        <TextView
             android:id="@+id/tv_created_at"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/layout_width_height"
+            android:layout_marginBottom="@dimen/dimen_5"
             android:gravity="start"
-            android:padding="8dp"
+            android:padding="@dimen/dimen_5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_url"
+            app:layout_constraintStart_toEndOf="@id/iv_photo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author"
             tools:text="CreatedAt" />
-
-        <!--        <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_createdAt" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
