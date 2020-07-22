@@ -2,7 +2,13 @@
     <string name="app_name">GitPRs</string>
     <string name="owner_search_hint">Owner Name</string>
     <string name="repo_search_hint">Repo Name</string>
-    <string name="search_issue">Search Open Issues</string>
+    <string name="search_issue">Search Open Pull Requests</string>
 
+    <string name="owner_validation">Please enter Owner/User name</string>
+    <string name="repo_validation">Please enter Repository name</string>
+
+    <string name="no_pull_request">There are no open pull request.</string>
+    <string name="something_went_wrong">Something went wrong, try with another combination.</string>
+    <string name="no_internet">Looks like internet is not available.</string>
 
 </resources>

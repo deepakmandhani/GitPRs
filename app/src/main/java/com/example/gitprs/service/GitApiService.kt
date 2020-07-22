@@ -3,7 +3,7 @@ package com.example.gitprs.service
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.gitprs.model.FailureResponse
-import com.example.gitprs.model.PullRequestResponse
+import com.example.gitprs.model.PullRequest
 import com.example.gitprs.model.Response
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,16 +21,16 @@ class GitApiService : GitApiContract {
     override fun getOpenPullRequest(
         owner: String,
         repo: String
-    ): LiveData<Response<PullRequestResponse, FailureResponse>> {
-        val liveData = MutableLiveData<Response<PullRequestResponse, FailureResponse>>()
-        apiService.getOpenPullRequest(owner, repo).enqueue(object : Callback<PullRequestResponse> {
-            override fun onFailure(call: Call<PullRequestResponse>, t: Throwable) {
+    ): LiveData<Response<List<PullRequest>, FailureResponse>> {
+        val liveData = MutableLiveData<Response<List<PullRequest>, FailureResponse>>()
+        apiService.getOpenPullRequest(owner, repo).enqueue(object : Callback<List<PullRequest>> {
+            override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
                 liveData.value = Response(null, FailureResponse(t))
             }
 
             override fun onResponse(
-                call: Call<PullRequestResponse>,
-                response: retrofit2.Response<PullRequestResponse>
+                call: Call<List<PullRequest>>,
+                response: retrofit2.Response<List<PullRequest>>
             ) {
                 if (response.isSuccessful) {
                     liveData.value = Response(response.body(), null)
