@@ -21,7 +21,11 @@ import kotlinx.android.synthetic.main.view_pull_request_row.view.*
 /**
  * Created by Deepak Mandhani on 2020-07-22.
  */
-class PullRequestRVAdapter(private val context: Context, var prList: List<PullRequest>) :
+class PullRequestRVAdapter(
+    private val context: Context,
+    var prList: List<PullRequest>,
+    private val callback: (String) -> Unit
+) :
     RecyclerView.Adapter<PullRequestRVAdapter.PullRequestViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PullRequestViewHolder {
@@ -70,6 +74,14 @@ class PullRequestRVAdapter(private val context: Context, var prList: List<PullRe
                 .placeholder(R.drawable.ic_git_user)
                 .error(R.drawable.ic_git_default)
                 .into(itemView.iv_photo)
+
+            itemView.tag = pullRequest.user.html_url
+            itemView.setOnClickListener(onClickListener)
+        }
+
+        private val onClickListener = View.OnClickListener {
+            val url = it.tag as String
+            callback(url)
         }
     }
 }

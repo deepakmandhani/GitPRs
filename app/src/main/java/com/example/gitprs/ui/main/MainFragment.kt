@@ -1,5 +1,6 @@
 package com.example.gitprs.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +46,9 @@ class MainFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        pullRequestRVAdapter = PullRequestRVAdapter(requireContext(), emptyList())
+        pullRequestRVAdapter = PullRequestRVAdapter(requireContext(), emptyList()) {
+            launchDetailPage(it)
+        }
         rv_issue.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_issue.adapter = pullRequestRVAdapter
@@ -82,7 +85,12 @@ class MainFragment : Fragment() {
         viewModel.observePullRequestLiveData().observe(viewLifecycleOwner, Observer {
             hideProgressBar()
             if (it.isNullOrEmpty()) {
-                iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.not_found))
+                iv_result.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.not_found
+                    )
+                )
                 showErrorView(requireContext().getString(R.string.no_pull_request))
                 return@Observer
             }
@@ -92,7 +100,12 @@ class MainFragment : Fragment() {
         viewModel.observeFailure().observe(viewLifecycleOwner, Observer {
             hideProgressBar()
             val message = it.anyObject ?: requireContext().getString(R.string.something_went_wrong)
-            iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.issue))
+            iv_result.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.issue
+                )
+            )
             showErrorView(message)
         })
     }
@@ -102,7 +115,12 @@ class MainFragment : Fragment() {
             showProgressBar()
             viewModel.getOpenPullRequest(ownerName, repoName)
         } else {
-            iv_result.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.internet))
+            iv_result.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.internet
+                )
+            )
             showErrorView(requireContext().getString(R.string.no_internet))
         }
     }
@@ -129,4 +147,9 @@ class MainFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
+    private fun launchDetailPage(url: String) {
+        val intent = Intent(requireActivity(), PullRequestDetailActivity::class.java)
+        intent.putExtra(PullRequestDetailActivity.PR_URL, url)
+        startActivity(intent)
+    }
 }
