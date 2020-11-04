@@ -4,8 +4,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/dimen_5"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_5"
     card_view:cardBackgroundColor="@color/light_blue"
     card_view:cardCornerRadius="@dimen/dimen_5"
     card_view:cardElevation="@dimen/dimen_1">
@@ -39,7 +39,7 @@
             android:id="@+id/tv_author"
             style="@style/layout_width_height"
             android:gravity="start"
-            android:padding="@dimen/dimen_5"
+            android:paddingLeft="@dimen/dimen_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_photo"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"

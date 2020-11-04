@@ -63,7 +63,7 @@ class PullRequestRVAdapter(
             val pullRequest = prList[position]
 
             val str = SpannableString("#${pullRequest.number}: ${pullRequest.title}")
-            val end = pullRequest.number.toString().length + 1
+            val end = pullRequest.number.toString().length + 2
             str.setSpan(StyleSpan(Typeface.BOLD), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             str.setSpan(ForegroundColorSpan(Color.BLUE), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             itemView.tv_title.setText(str, TextView.BufferType.SPANNABLE)
